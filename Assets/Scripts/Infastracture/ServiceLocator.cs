@@ -1,18 +1,22 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 
 namespace Trell.Skyroads.Infrastructure
 {
-    public static class ServiceLocator
+    public class ServiceLocator
     {
+        
+        public static ServiceLocator Instance => _instance ??= new();
+        
+        private static ServiceLocator _instance;
+        
         public static event Action<Type> Registered;
  
         private static readonly Dictionary<Type, object> _services = new();
         
         public static bool IsRegistered<T>() => _services.ContainsKey(typeof(T));
 
-        public static void Register<T>(T serviceInstance) where T : IService
+        public void Register<T>(T serviceInstance) where T : IService
         {
             Type key = typeof(T) == typeof(object) ? serviceInstance.GetType() : typeof(T);
 
@@ -24,26 +28,24 @@ namespace Trell.Skyroads.Infrastructure
             Registered?.Invoke(key);
         }
 
-        public static T Get<T>() where T : IService
+        public T Get<T>() where T : IService
         {
             Type key = typeof(T);
-            if (!_services.ContainsKey(key))
+            if (!_services.TryGetValue(key, out object service))
             {
                 throw new Exception($"[Service Locator] Service \"{key}\" not found.");
             }
 
-            return (T)_services[key];
+            return (T)service;
         }
 
-        public static void Unregister<T>() where T : IService
+        public void Unregister<T>() where T : IService
         {
             Type key = typeof(T);
-            if (!_services.ContainsKey(key))
+            if (!_services.Remove(key))
             {
                 throw new Exception($"[Service Locator] Cant unregister service \"{key}\" which is not registered");
             }
-
-            _services.Remove(key);
         }
     }
 }

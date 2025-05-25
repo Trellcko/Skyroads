@@ -3,23 +3,24 @@ using UnityEngine;
 
 namespace Trell.Skyroads.Infrastructure
 {
-    public class GameBehaviour : MonoBehaviour
+    public class GameBehaviour : MonoBehaviour, ICoroutineRunnerService
     {
         private readonly StateMachine _stateMachine = new();
-        
+
         private void Awake()
         {
-            _stateMachine.AddState(
-                new InitState(_stateMachine)
-                );
+            DontDestroyOnLoad(gameObject);
+            InitGameStateMachine();
         }
-    }
 
-    public class InitState : BaseStateWithoutPayload
-    {
-        public InitState(StateMachine machine) : base(machine)
+        private void InitGameStateMachine()
         {
-            
+            _stateMachine.AddState(
+                new InitState(_stateMachine, ServiceLocator.Instance,this),
+                new LoadGameState(_stateMachine, ServiceLocator.Instance.Get<ISceneService>()),
+                new GameLoopState(_stateMachine));
+
+            _stateMachine.SetState<InitState>();
         }
     }
 }
