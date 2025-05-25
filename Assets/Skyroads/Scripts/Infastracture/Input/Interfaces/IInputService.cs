@@ -1,0 +1,16 @@
+using System;
+using Trell.Skyroads.Infrastructure;
+using UnityEngine;
+
+namespace Trell.Skyroads.Infrastructure.Input
+{
+    public interface IInputService : IService
+    {
+        event Action<Vector2> MovementPerformed;
+        event Action BoostPerformed;
+        event Action BoostReleased;
+        event Action MovementCancelled;
+        void EnableInput();
+        void DisableInput();
+    }
+}
