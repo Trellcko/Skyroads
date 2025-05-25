@@ -6,8 +6,9 @@ namespace Trell.Skyroads.Infrastructure
 {
     public interface IInputService : IService
     {
-        event Action<Vector2> AxisUpdated;
-        event Action BoostPressed;
+        event Action<Vector2> MovementPerformed;
+        event Action BoostPerformed;
         event Action BoostReleased;
+        event Action MovementCancelled;
     }
 }

@@ -15,12 +15,13 @@ namespace Trell.Skyroads.Infrastructure
 
         private void InitGameStateMachine()
         {
+            Debug.ClearDeveloperConsole();
             _stateMachine.AddState(
-                new InitState(_stateMachine, ServiceLocator.Instance,this),
+                new BootstrapState(_stateMachine, ServiceLocator.Instance,this),
                 new LoadGameState(_stateMachine, ServiceLocator.Instance.Get<ISceneService>()),
                 new GameLoopState(_stateMachine));
 
-            _stateMachine.SetState<InitState>();
+            _stateMachine.SetState<BootstrapState>();
         }
     }
 }

@@ -5,7 +5,6 @@ namespace Trell.Skyroads.Infrastructure
 {
     public class ServiceLocator
     {
-        
         public static ServiceLocator Instance => _instance ??= new();
         
         private static ServiceLocator _instance;
@@ -14,7 +13,7 @@ namespace Trell.Skyroads.Infrastructure
  
         private static readonly Dictionary<Type, object> _services = new();
         
-        public static bool IsRegistered<T>() => _services.ContainsKey(typeof(T));
+        public bool IsRegistered<T>() => _services.ContainsKey(typeof(T));
 
         public void Register<T>(T serviceInstance) where T : IService
         {
