@@ -9,6 +9,7 @@ namespace Trell.Skyroads.Gameplay.Environment
         [SerializeField] private MeshRenderer _meshRenderer;
         [SerializeField] private FloorTextureUpdaterData _floorTextureUpdaterData;
         
+        private IStaticDataService _staticDataService;
         private IInputService _inputService;
         private Material _floorMaterial;
         
@@ -21,6 +22,7 @@ namespace Trell.Skyroads.Gameplay.Environment
         {
             _speed = _floorTextureUpdaterData.Speed;
             _floorMaterial = _meshRenderer.sharedMaterial;
+            _staticDataService = ServiceLocator.Instance.Get<IStaticDataService>();
             _inputService = ServiceLocator.Instance.Get<IInputService>();
         }
 
@@ -49,7 +51,7 @@ namespace Trell.Skyroads.Gameplay.Environment
 
         private void OnBoostPerformed()
         {
-            _speed = _floorTextureUpdaterData.BoostSpeed;
+            _speed = _staticDataService.GetTimeData().BoostTimeSpeed * _floorTextureUpdaterData.Speed;
         }
     }
 }

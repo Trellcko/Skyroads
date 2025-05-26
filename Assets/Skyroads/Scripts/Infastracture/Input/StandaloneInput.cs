@@ -26,6 +26,8 @@ namespace Trell.Skyroads.Infrastructure
             _inputSystem.Player.Boost.canceled += OnBoostCanceled;
         }
 
+        public bool IsBoosted { get; private set; }
+
         public void EnableInput()
         {
             _inputSystem.Enable();
@@ -39,11 +41,18 @@ namespace Trell.Skyroads.Infrastructure
         private void OnMovementCanceled(InputAction.CallbackContext obj) => 
             MovementCancelled?.Invoke();
 
-        private void OnBoostCanceled(InputAction.CallbackContext obj) => 
+        private void OnBoostCanceled(InputAction.CallbackContext obj)
+        {
+            IsBoosted = false;
             BoostReleased?.Invoke();
+        }
 
-        private void OnBoostPerformed(InputAction.CallbackContext obj) => 
+        private void OnBoostPerformed(InputAction.CallbackContext obj)
+        {
+            
+            IsBoosted = true;
             BoostPerformed?.Invoke();
+        }
 
         private void OnMovementPerformed(InputAction.CallbackContext obj) => 
             MovementPerformed?.Invoke(obj.ReadValue<Vector2>());

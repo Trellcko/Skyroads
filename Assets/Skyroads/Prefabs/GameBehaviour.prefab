@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shipData: {fileID: 11400000, guid: 0cde67a70d4108541901dee012f80444, type: 2}
+  _asteroidData: {fileID: 11400000, guid: 076cef8ad63f13940b1cdcab0fe71dd9, type: 2}
+  _timeData: {fileID: 11400000, guid: 7edd952e7761c8e428d3b926a1f08ab3, type: 2}
 --- !u!1 &3003118217029284501
 GameObject:
   m_ObjectHideFlags: 0

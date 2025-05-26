@@ -31,14 +31,20 @@ namespace Trell.Skyroads.Gameplay.CameraLogic
 
         private void ZoomOut()
         {
+            float duration = (_data.BaseFieldOfView - _camera.fieldOfView) * _data.Delta;
             _camera.DOKill();
-            _camera.DOFieldOfView(_data.BaseFieldOfView, (_data.BaseFieldOfView - _camera.fieldOfView) * _data.Delta);
+            _camera.transform.DOKill();
+            _camera.transform.DOMoveZ(_data.BasePositionZ, duration);
+            _camera.DOFieldOfView(_data.BaseFieldOfView, duration);
         }
 
         private void ZoomIn()
         {
-            _camera.DOKill();    
-            _camera.DOFieldOfView(_data.BoostFieldOfView, (_camera.fieldOfView - _data.BoostFieldOfView) * _data.Delta);
+            float duration = (_camera.fieldOfView - _data.BoostFieldOfView) * _data.Delta;
+            _camera.DOKill();
+            _camera.transform.DOKill();
+            _camera.transform.DOMoveZ(_data.BoostPositionZ, duration);
+            _camera.DOFieldOfView(_data.BoostFieldOfView, duration);
         }
     }
 }

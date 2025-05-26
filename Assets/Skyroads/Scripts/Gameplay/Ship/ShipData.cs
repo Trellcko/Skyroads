@@ -9,7 +9,6 @@ namespace Trell.Skyroads.Gameplay.Ship
         [field: SerializeField] public AssetReference ShipReference { get; set; } 
         [field: SerializeField] public Vector3 SpawnPoint { get; private set; }
         [field: SerializeField] public float BaseSpeed { get; private set; }
-        [field: SerializeField] public float BoostSpeed { get; private set; }
         [field: SerializeField] public float XLimit { get; private set; }
     }
 }

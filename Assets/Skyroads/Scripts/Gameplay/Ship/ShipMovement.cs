@@ -21,11 +21,11 @@ namespace Trell.Skyroads.Gameplay.Ship
             _inputService = ServiceLocator.Instance.Get<IInputService>();
         }
 
-        public void Init(float baseSpeed, float boostSpeed, float xLimit)
+        public void Init(float baseSpeed, float boostModificator, float xLimit)
         {
             _speed = baseSpeed;
             _baseSpeed = baseSpeed;
-            _boostSpeed = boostSpeed;
+            _boostSpeed = boostModificator * baseSpeed;
             _xLimit = xLimit;
         }
         
@@ -64,7 +64,6 @@ namespace Trell.Skyroads.Gameplay.Ship
 
         private void OnMovementPerformed(Vector2 obj)
         {
-            Debug.Log(obj);
             _movementDirection = obj;
         }
 

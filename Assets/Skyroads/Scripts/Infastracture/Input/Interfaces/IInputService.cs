@@ -10,6 +10,7 @@ namespace Trell.Skyroads.Infrastructure.Input
         event Action BoostPerformed;
         event Action BoostReleased;
         event Action MovementCancelled;
+        bool IsBoosted { get; }
         void EnableInput();
         void DisableInput();
     }

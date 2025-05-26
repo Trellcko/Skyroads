@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: new CameraBoostZoom
   m_EditorClassIdentifier: 
   <BaseFieldOfView>k__BackingField: 83.2
-  <BoostFieldOfView>k__BackingField: 70
-  <Delta>k__BackingField: 1
+  <BoostFieldOfView>k__BackingField: 78
+  <BoostPositionZ>k__BackingField: -50
+  <BasePositionZ>k__BackingField: -42.7
+  <Delta>k__BackingField: 0.1
