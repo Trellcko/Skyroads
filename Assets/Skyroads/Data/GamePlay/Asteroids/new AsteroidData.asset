@@ -12,6 +12,98 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c6a10edc104366a563fa278b939014, type: 3}
   m_Name: new AsteroidData
   m_EditorClassIdentifier: 
-  <Speed>k__BackingField: 0
-  <AngularSpeed>k__BackingField: 0
-  _assetReferences: []
+  <BaseSpeed>k__BackingField: 64
+  <AngularSpeed>k__BackingField: 35
+  _assetReferences:
+  - m_AssetGUID: 94a549d006769724d80ed44380b66b60
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: a2b4cb7dee9ef1f4d91c6278e4b4c0c0
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 26837da39efdb4949afd0582ee150276
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 61c8512e82e983a4d858a3a87b11c328
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 5fd0e783035e6384baf83e00a8967dc8
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: af00bfa0a8d42e24db776aa9ce37e137
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 203d680f800f74c4b907e58d1e20444e
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: c499673cc5d7ad8439747fc702aab095
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 1ea1866d5493a9748971628aad13ab18
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 92ff9b4bb99f8da4997e947169d187c8
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 85750fb23160bc14bba2384e29509b9a
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 82dcae38ceacf2d42b9683a5b428c7db
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 1b018392b7e75104897dacef41d451d2
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: f59dbffc5c2d8a045a427a23685505a2
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 0d0cbf7236d647944a77dbb8d586708a
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 269dfa68a7eb7a546a4928b24c0990df
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: b06a33f8e592b2a4c80f60dce6e37ff6
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 1163f8b92fa576644a8ae99822ee51f1
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: de1c0905ec077744797bedd86a7d603d
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: a8380f97fab78ee41b9ef2c7044e4b9b
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: c2357713fdc46b14da0dfdbca3e4f275
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 73ee4d15d2c32794db1cbf8a269a7913
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 6e3f6b50771477b47b84f58f0d1f0abb
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0

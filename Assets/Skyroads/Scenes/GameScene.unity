@@ -664,14 +664,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _drawSafeZone: 1
-  _drawSpawnLine: 0
+  _drawSpawnLine: 1
   _asteroidSafeZoneX: {x: 0, y: 0}
-  _spawnAsteroidsCount: 0
+  _spawnAsteroidsCount: 1
   _safeZoneWeight: 45
   _offsetBetweenSafeZones: 95
-  _timeBetweenAsteroidSpawns: 0
+  _timeBetweenAsteroidSpawns: 5
   _spawnZ: 180
-  _spawnXOffset: 1.73
+  _spawnY: 25
+  _spawnXOffset: 117.14
 --- !u!1 &862818464
 GameObject:
   m_ObjectHideFlags: 0
