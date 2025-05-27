@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Trell.Skyroads.Gameplay.Ship;
 using Trell.Skyroads.Infrastructure.Factories;
+using Trell.Skyroads.Infrastructure.Saving;
 using UnityEngine;
 
 namespace Trell.Skyroads.Infrastructure.States
@@ -8,11 +9,13 @@ namespace Trell.Skyroads.Infrastructure.States
     public class GameLoopState : BaseStateWithoutPayload
     {
         private readonly IGameFactory _gameFactory;
+        private readonly ISaveService _saveService;
         private ShipFacade _ship;
 
-        public GameLoopState(StateMachine machine, IGameFactory gameFactory) : base(machine)
+        public GameLoopState(StateMachine machine, IGameFactory gameFactory, ISaveService saveService) : base(machine)
         {
             _gameFactory = gameFactory;
+            _saveService = saveService;
         }
 
         public override void Enter()
@@ -34,7 +37,7 @@ namespace Trell.Skyroads.Infrastructure.States
 
         private void OnAsteroidCollided()
         {
-            Debug.Log("OnAsteroidCollided");
+            _saveService.Save();
             GoToState<LooseState>();
         }
 

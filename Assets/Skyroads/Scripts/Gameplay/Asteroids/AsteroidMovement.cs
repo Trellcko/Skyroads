@@ -25,6 +25,14 @@ namespace Trell.Skyroads.Gameplay.Asteroid
         {
             _inputService.BoostPerformed += OnBoostPerformed;
             _inputService.BoostReleased += OnBoostReleased;
+            if (_inputService.IsBoosted)
+            {
+                OnBoostPerformed();
+            }
+            else
+            {
+                OnBoostReleased();
+            }
         }
 
         private void OnDisable()

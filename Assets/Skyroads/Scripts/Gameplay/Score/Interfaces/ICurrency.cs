@@ -3,7 +3,7 @@ using Trell.Skyroads.Infrastructure;
 
 namespace Trell.Skyroads.Gameplay.Score
 {
-    public interface ICurrency : IService
+    public interface ICurrency
     {
         int CurrentValue { get; }
         event Action CurrencyChanged;

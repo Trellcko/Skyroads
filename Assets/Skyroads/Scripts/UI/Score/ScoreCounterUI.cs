@@ -14,7 +14,7 @@ namespace Trell.Skyroads.UI
 
         private void Awake()
         {
-            _score = ServiceLocator.Instance.Get<IScore>();
+            _score = ServiceLocator.Instance.Get<IScoreContainer>().Score;
         }
 
         private void Start()

@@ -20,7 +20,6 @@ namespace Trell.Skyroads.Infrastructure.States
         {
             try
             {
-                Debug.Log("lOSER");
                 _losePopup = await _gameFactory.CreateLosePopup();
                 _losePopup.LevelRestartRequired +=  GoToState<LoadGameState>;
             }

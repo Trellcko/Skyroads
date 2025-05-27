@@ -30,7 +30,7 @@ namespace Trell.Skyroads.Gameplay.Score
         {
             _staticDataService = ServiceLocator.Instance.Get<IStaticDataService>();
             _inputService = ServiceLocator.Instance.Get<IInputService>();
-            _score = ServiceLocator.Instance.Get<IScore>();
+            _score = ServiceLocator.Instance.Get<IScoreContainer>().Score;
             _gameFactory = ServiceLocator.Instance.Get<IGameFactory>();
             
             if(!_gameFactory.SpawnedShip) 

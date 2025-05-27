@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2de5143ad0f24065a183e988b216085c, type: 3}
   m_Name: new AsteroidSpawnerData
   m_EditorClassIdentifier: 
-  <TimeBetweenAsteroidSpawnsMinMax>k__BackingField: {x: 2, y: 5}
+  <TimeBetweenAsteroidSpawnsMinMax>k__BackingField: {x: 1, y: 5}
   <TimeToChangeSpawnTimeBetweenAsteroids>k__BackingField: 5
-  <SpawnIntervalStep>k__BackingField: 0.2
+  <SpawnIntervalStep>k__BackingField: 0.1
+  <AsteroidCountChanceSpawnIncreasing>k__BackingField:
+  - 0
+  - 0.025
+  - 0.0125
+  - 0.0075
+  - 0.0035
+  <TimeToChangCountChanceSpawn>k__BackingField: 10

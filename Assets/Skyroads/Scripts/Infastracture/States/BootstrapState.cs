@@ -46,9 +46,9 @@ namespace Trell.Skyroads.Infrastructure.States
             PersistantPlayerProgressService persistantPlayerProgressService = new();
             _serviceLocator.Register<IPersistantPlayerProgressService>(persistantPlayerProgressService);
 
-            Score score = new();
-            _serviceLocator.Register<IScore>(score);
-            _serviceLocator.Register<ISaveService>(new SaveService(persistantPlayerProgressService, score));
+            ScoreContainer scoreContainer = new();
+            _serviceLocator.Register<IScoreContainer>(scoreContainer);
+            _serviceLocator.Register<ISaveService>(new SaveService(persistantPlayerProgressService, scoreContainer.Score));
         }
     }
 }
