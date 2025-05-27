@@ -17,7 +17,7 @@ namespace Trell.Skyroads.Gameplay.Score
         private IStaticDataService _staticDataService;
         private IInputService _inputService;
         private IScore _score;
-        private IGameFactory _gameFactory;
+        private ILosingNotifiedService _losingNotifiedService;
 
         private BetterTimer _betterTimer;
 
@@ -31,12 +31,9 @@ namespace Trell.Skyroads.Gameplay.Score
             _staticDataService = ServiceLocator.Instance.Get<IStaticDataService>();
             _inputService = ServiceLocator.Instance.Get<IInputService>();
             _score = ServiceLocator.Instance.Get<IScoreContainer>().Score;
-            _gameFactory = ServiceLocator.Instance.Get<IGameFactory>();
+            _losingNotifiedService = ServiceLocator.Instance.Get<ILosingNotifiedService>();
             
-            if(!_gameFactory.SpawnedShip) 
-                _gameFactory.ShipCreated += OnShipCreated;
-            else
-                OnShipCreated(_gameFactory.SpawnedShip);
+            _losingNotifiedService.Lost += StopCount;
             
             _betterTimer = new(1f, loop: true);
             _betterTimer.Completed += OnTimerCompleted;
@@ -50,10 +47,7 @@ namespace Trell.Skyroads.Gameplay.Score
 
         private void OnDisable()
         {
-            
-            if(_ship)
-                _ship.ShipCollisionEventsInvoker.AsteroidCollided -= StopCount;
-            _gameFactory.ShipCreated -= OnShipCreated;
+            _losingNotifiedService.Lost -= StopCount;
             _endOfTheMapCollisionEventInvoker.AsteroidCollided -= OnAsteroidPassed;
             _inputService.BoostPerformed -= OnBoostPerformed;
             _inputService.BoostReleased -= OnBoostReleased;
@@ -89,14 +83,7 @@ namespace Trell.Skyroads.Gameplay.Score
             _inputService.BoostReleased -= OnBoostReleased;
             _betterTimer.Pause();
         }
-
-        private void OnShipCreated(ShipFacade obj)
-        {
-            _gameFactory.ShipCreated -= OnShipCreated;
-            _ship = obj;
-            _ship.ShipCollisionEventsInvoker.AsteroidCollided += StopCount;
-        }
-
+        
         private void OnAsteroidPassed()
         {
             if(!_isCounting)

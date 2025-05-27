@@ -14,11 +14,13 @@ namespace Trell.Skyroads.Gameplay.Score
         public void AddCurrency(int amount)
         {
             CurrentValue += amount;
+            CurrencyChanged?.Invoke();
         }
 
         public void SpendCurrency(int amount)
         {
             CurrentValue -= amount;
+            CurrencyChanged?.Invoke();
         }
     }
 }

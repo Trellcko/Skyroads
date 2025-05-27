@@ -1,4 +1,6 @@
 using System;
+using Trell.Skyroads.Gameplay.Score;
+using Trell.Skyroads.Infrastructure;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -10,6 +12,13 @@ namespace Trell.Skyroads.Gameplay.Asteroid
 
         private ObjectPool<AsteroidFacade> _pool;
         
+        private IScoreContainer _scoreContainer;
+
+        private void Awake()
+        {
+            _scoreContainer = ServiceLocator.Instance.Get<IScoreContainer>();
+        }
+
         private void OnEnable()
         {
             _asteroidFacade.CollisionEventInvoker.EndOfTheMapCollided += OnEndOfTheMapCollided;
@@ -27,6 +36,7 @@ namespace Trell.Skyroads.Gameplay.Asteroid
         
         private void OnEndOfTheMapCollided()
         {
+            _scoreContainer.PassedMeteorites.AddCurrency(1);
             _pool.Release(_asteroidFacade);
         }
     }

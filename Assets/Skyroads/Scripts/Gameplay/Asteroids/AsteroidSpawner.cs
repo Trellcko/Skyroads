@@ -34,9 +34,9 @@ namespace Trell.Skyroads.Gameplay.Asteroid
         private IStaticDataService _staticDataService;
         private IInputService _inputService;
         private IGameFactory _gameFactory;
-        private ShipFacade _ship;
 
-        private List<float> _countChanceSpawn = new List<float>();
+        private List<float> _countChanceSpawn = new();
+        private ILosingNotifiedService _losingNotifedService;
 
         #region Gizmoz
         private void OnDrawGizmos()
@@ -57,6 +57,8 @@ namespace Trell.Skyroads.Gameplay.Asteroid
             _inputService = ServiceLocator.Instance.Get<IInputService>();
             _staticDataService = ServiceLocator.Instance.Get<IStaticDataService>();
             _gameFactory = ServiceLocator.Instance.Get<IGameFactory>();
+            _losingNotifedService = ServiceLocator.Instance.Get<ILosingNotifiedService>();
+            _losingNotifedService.Lost += OnLost;
             _spawnTime = _asteroidSpawnerData.TimeBetweenAsteroidSpawnsMinMax.y;
             _spawnTimer = new(_spawnTime, loop: true, playAwake: true);
             _changeSpawnTimeTimer = new(_asteroidSpawnerData.TimeToChangeSpawnTimeBetweenAsteroids, loop: true,
@@ -68,9 +70,6 @@ namespace Trell.Skyroads.Gameplay.Asteroid
         private void Start()
         {
             InitCountChanceSpawn();
-
-            _ship = _gameFactory.SpawnedShip;
-            _ship.ShipCollisionEventsInvoker.AsteroidCollided += OnAsteroidCollided;
         }
 
         private void OnEnable()
@@ -84,8 +83,8 @@ namespace Trell.Skyroads.Gameplay.Asteroid
 
         private void OnDisable()
         {
+            _losingNotifedService.Lost -= OnLost;
             _countChanceSpawnIncreasingTimer.Completed -= OnCountChanceSpawnIncreasingTimerCompleted;
-            _ship.ShipCollisionEventsInvoker.AsteroidCollided -= OnAsteroidCollided;
             _spawnTimer.Completed -= SpawnAsteroids;
             _inputService.BoostPerformed -= OnBoostPerformed;
             _inputService.BoostReleased -= OnBoostReleased;
@@ -202,7 +201,7 @@ namespace Trell.Skyroads.Gameplay.Asteroid
             _changeSpawnTimeTimer.SetSpeed(_staticDataService.GetTimeData().BoostTimeSpeed);
         }
 
-        private void OnAsteroidCollided()
+        private void OnLost()
         {
             gameObject.SetActive(false);
         }

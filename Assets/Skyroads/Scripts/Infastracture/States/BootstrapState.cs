@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Trell.Skyroads.Gameplay;
 using Trell.Skyroads.Gameplay.Score;
 using Trell.Skyroads.Infrastructure.AssetManagment;
 using Trell.Skyroads.Infrastructure.Factories;
@@ -49,6 +50,7 @@ namespace Trell.Skyroads.Infrastructure.States
             ScoreContainer scoreContainer = new();
             _serviceLocator.Register<IScoreContainer>(scoreContainer);
             _serviceLocator.Register<ISaveService>(new SaveService(persistantPlayerProgressService, scoreContainer.Score));
+            _serviceLocator.Register<ILosingNotifiedService>(new LosingNotifiedService());
         }
     }
 }

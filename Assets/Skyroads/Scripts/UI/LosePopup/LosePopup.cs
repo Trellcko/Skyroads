@@ -7,6 +7,8 @@ namespace Trell.Skyroads.UI
     {
         [SerializeField] private ButtonWrapper _buttonWrapper;
 
+        [SerializeField] private GameObject _congratulationText;
+        
         public event Action LevelRestartRequired;
 
         private void OnEnable()
@@ -19,6 +21,11 @@ namespace Trell.Skyroads.UI
             _buttonWrapper.Clicked -= OnClicked;
         }
 
+        public void ShowCongratulationText()
+        {
+            _congratulationText.SetActive(true);
+        }
+        
         private void OnClicked()
         {
             LevelRestartRequired?.Invoke();

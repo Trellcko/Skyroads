@@ -42,7 +42,6 @@ namespace Trell.Skyroads.Gameplay.Score
         public void Read(SaveData saveData)
         {
             HighValue = saveData.HighScore;
-            HighValueChanged?.Invoke();
         }
     }
 }

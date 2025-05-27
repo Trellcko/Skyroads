@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c6a10edc104366a563fa278b939014, type: 3}
   m_Name: new AsteroidData
   m_EditorClassIdentifier: 
-  <BaseSpeed>k__BackingField: 180
+  <BaseSpeed>k__BackingField: 220
   <AngularSpeed>k__BackingField: 50
   _assetReferences:
   - m_AssetGUID: be97f1bf36281ec4a8b21cec99af0380

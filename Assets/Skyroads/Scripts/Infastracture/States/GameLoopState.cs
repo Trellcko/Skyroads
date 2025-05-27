@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Trell.Skyroads.Gameplay.Score;
 using Trell.Skyroads.Gameplay.Ship;
 using Trell.Skyroads.Infrastructure.Factories;
 using Trell.Skyroads.Infrastructure.Saving;
@@ -10,12 +11,15 @@ namespace Trell.Skyroads.Infrastructure.States
     {
         private readonly IGameFactory _gameFactory;
         private readonly ISaveService _saveService;
+        private readonly IScoreContainer _scoreContainer;
         private ShipFacade _ship;
+        private bool _scoreBeated;
 
-        public GameLoopState(StateMachine machine, IGameFactory gameFactory, ISaveService saveService) : base(machine)
+        public GameLoopState(StateMachine machine, IGameFactory gameFactory, ISaveService saveService, IScoreContainer scoreContainer) : base(machine)
         {
             _gameFactory = gameFactory;
             _saveService = saveService;
+            _scoreContainer = scoreContainer;
         }
 
         public override void Enter()
@@ -26,6 +30,12 @@ namespace Trell.Skyroads.Infrastructure.States
             {
                 OnShipCreated(_gameFactory.SpawnedShip);
             }
+            _scoreContainer.Score.HighValueChanged += OnHighValueChanged;
+        }
+
+        private void OnHighValueChanged()
+        {
+            _scoreBeated = true;
         }
 
         public override void Exit()
@@ -38,7 +48,9 @@ namespace Trell.Skyroads.Infrastructure.States
         private void OnAsteroidCollided()
         {
             _saveService.Save();
-            GoToState<LooseState>();
+            bool temp = _scoreBeated;
+            _scoreBeated = false;
+            GoToState<LostState, bool>(temp);
         }
 
         private void OnShipCreated(ShipFacade obj)

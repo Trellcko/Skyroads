@@ -1,3 +1,4 @@
+using Trell.Skyroads.Gameplay;
 using Trell.Skyroads.Gameplay.Score;
 using Trell.Skyroads.Infrastructure.Factories;
 using Trell.Skyroads.Infrastructure.Saving;
@@ -29,14 +30,22 @@ namespace Trell.Skyroads.Infrastructure
         {
             _stateMachine.AddState(
                 new BootstrapState(_stateMachine, ServiceLocator.Instance,this, _staticDataService),
+                
                 new LoadProgressState(_stateMachine, ServiceLocator.Instance.Get<ISaveService>(),
                     ServiceLocator.Instance.Get<IPersistantPlayerProgressService>()) ,
+               
                 new LoadGameState(_stateMachine, ServiceLocator.Instance.Get<ISceneService>(), 
-                    ServiceLocator.Instance.Get<IGameFactory>(), ServiceLocator.Instance.Get<IScoreContainer>().Score,
+                    ServiceLocator.Instance.Get<IGameFactory>(), 
+                    ServiceLocator.Instance.Get<IScoreContainer>(),
                     ServiceLocator.Instance.Get<IPersistantPlayerProgressService>()),
+                
                 new GameLoopState(_stateMachine, ServiceLocator.Instance.Get<IGameFactory>(), 
-                    ServiceLocator.Instance.Get<ISaveService>()),
-                new LooseState(_stateMachine, ServiceLocator.Instance.Get<IGameFactory>()));
+                    ServiceLocator.Instance.Get<ISaveService>(), 
+                    ServiceLocator.Instance.Get<IScoreContainer>()),
+                
+                new LostState(_stateMachine, ServiceLocator.Instance.Get<IGameFactory>(), 
+                    ServiceLocator.Instance.Get<ILosingNotifiedService>()));
+            
             _saveService = ServiceLocator.Instance.Get<ISaveService>();
             _stateMachine.SetState<BootstrapState>();
         }
