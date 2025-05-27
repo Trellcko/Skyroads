@@ -13,19 +13,24 @@ namespace Trell.Skyroads.Gameplay.Asteroid
         private ObjectPool<AsteroidFacade> _pool;
         
         private IScoreContainer _scoreContainer;
+        private ILosingNotifiedService _losingNotifiedService;
+        private bool _stopCounting;
 
         private void Awake()
         {
+            _losingNotifiedService = ServiceLocator.Instance.Get<ILosingNotifiedService>();
             _scoreContainer = ServiceLocator.Instance.Get<IScoreContainer>();
         }
 
         private void OnEnable()
         {
+            _losingNotifiedService.Lost += OnLost;
             _asteroidFacade.CollisionEventInvoker.EndOfTheMapCollided += OnEndOfTheMapCollided;
         }
 
         private void OnDisable()
         {
+            _losingNotifiedService.Lost -= OnLost;
             _asteroidFacade.CollisionEventInvoker.EndOfTheMapCollided -= OnEndOfTheMapCollided;
         }
 
@@ -33,10 +38,16 @@ namespace Trell.Skyroads.Gameplay.Asteroid
         {
             _pool = pool;
         }
-        
+
+        private void OnLost()
+        {
+            _stopCounting = true;
+        }
+
         private void OnEndOfTheMapCollided()
         {
-            _scoreContainer.PassedMeteorites.AddCurrency(1);
+            if(!_stopCounting)
+                _scoreContainer.PassedMeteorites.AddCurrency(1);
             _pool.Release(_asteroidFacade);
         }
     }
