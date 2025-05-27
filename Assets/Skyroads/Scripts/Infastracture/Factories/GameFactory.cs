@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Trell.Skyroads.Gameplay.Asteroid;
 using Trell.Skyroads.Gameplay.Ship;
 using UnityEngine;
+using UnityEngine.Pool;
 
 namespace Trell.Skyroads.Infrastructure.Factories
 {
@@ -9,6 +11,8 @@ namespace Trell.Skyroads.Infrastructure.Factories
     {
         private readonly IAssetProvider _assetProvider;
         private readonly IStaticDataService _staticDataService;
+
+        private readonly Dictionary<GameObject, ObjectPool<AsteroidFacade>> _asteroidPools = new();
         
         public GameFactory(IAssetProvider assetProvider, IStaticDataService staticDataService)
         {
@@ -29,14 +33,34 @@ namespace Trell.Skyroads.Infrastructure.Factories
             return spawned;
         }
 
-        public async Task<GameObject> CreateAsteroid(Vector3 asteroidPosition)
+        public async Task<AsteroidFacade> CreateAsteroid(Vector3 asteroidPosition)
         {
             AsteroidData asteroidData = _staticDataService.GetAsteroidData();
             GameObject asteroidPrefab = await _assetProvider.Load<GameObject>(asteroidData.AssetReferences[Random.Range(0, asteroidData.AssetReferences.Count)]);
-            GameObject spawned = Object.Instantiate(asteroidPrefab, asteroidPosition, Quaternion.identity);
-            spawned.GetComponent<AsteroidMovement>().SetSpeed(asteroidData.BaseSpeed, asteroidData.AngularSpeed, _staticDataService.GetTimeData().BoostTimeSpeed);
-            
+            if (!_asteroidPools.TryGetValue(asteroidPrefab, out ObjectPool<AsteroidFacade> _))
+            {
+                _asteroidPools.Add(asteroidPrefab, CreateAsteroidObjectPool(asteroidPrefab, asteroidData));
+            }
+
+            ObjectPool<AsteroidFacade> pool = _asteroidPools[asteroidPrefab];
+            AsteroidFacade spawned = pool.Get();
+            spawned.AsteroidReturnToThePool.SetPool(pool);
+            spawned.transform.position = asteroidPosition;
             return spawned;
+        }
+
+        private ObjectPool<AsteroidFacade> CreateAsteroidObjectPool(GameObject asteroidPrefab, AsteroidData asteroidData)
+        {
+            return new(()=>
+                {
+                    AsteroidFacade spawned = Object.Instantiate(asteroidPrefab, Vector3.zero, Quaternion.identity).GetComponent<AsteroidFacade>();
+                    spawned.AsteroidMovement.SetSpeed(asteroidData.BaseSpeed, asteroidData.AngularSpeed, _staticDataService.GetTimeData().BoostTimeSpeed);
+                    return spawned;
+                }, asteroid =>
+                {
+                    asteroid.gameObject.SetActive(true);
+                },
+                asteroid=> asteroid.gameObject.SetActive(false));
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Trell.Skyroads.Gameplay.Asteroid;
 using UnityEngine;
 
 namespace Trell.Skyroads.Infrastructure.Factories
@@ -6,6 +7,6 @@ namespace Trell.Skyroads.Infrastructure.Factories
     public interface IGameFactory : IService
     {
         Task<GameObject> CreateShip();
-        Task<GameObject> CreateAsteroid(Vector3 asteroidPosition);
+        Task<AsteroidFacade> CreateAsteroid(Vector3 asteroidPosition);
     }
 }

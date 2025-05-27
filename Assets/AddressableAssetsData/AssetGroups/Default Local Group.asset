@@ -22,123 +22,23 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 94a549d006769724d80ed44380b66b60
-    m_Address: Asteroid1Texture1 Variant
+  - m_GUID: a83a5707211bdd34684c946363b44e51
+    m_Address: Asteroid4
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a2b4cb7dee9ef1f4d91c6278e4b4c0c0
-    m_Address: Asteroid2Texture1 Variant
+  - m_GUID: 6ecd72426dfd54442bafbe8dc38d63e7
+    m_Address: Asteroid3
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 61c8512e82e983a4d858a3a87b11c328
-    m_Address: Asteroid3Texture1 Variant
+  - m_GUID: b0e0c45085988924ba918560f6fcd5c6
+    m_Address: Asteroid2
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: af00bfa0a8d42e24db776aa9ce37e137
-    m_Address: Asteroid4Texture1 Variant
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c499673cc5d7ad8439747fc702aab095
-    m_Address: Asteroid5Texture1 Variant
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 92ff9b4bb99f8da4997e947169d187c8
-    m_Address: Asteroid6Texture1 Variant
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 82dcae38ceacf2d42b9683a5b428c7db
-    m_Address: Asteroid7Texture1 Variant
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f59dbffc5c2d8a045a427a23685505a2
-    m_Address: Asteroid8Texture1 Variant
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 269dfa68a7eb7a546a4928b24c0990df
-    m_Address: Asteroid9Texture1 Variant
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1163f8b92fa576644a8ae99822ee51f1
-    m_Address: Asteroid10Texture1 Variant
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a8380f97fab78ee41b9ef2c7044e4b9b
-    m_Address: Asteroid11Texture1 Variant
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 73ee4d15d2c32794db1cbf8a269a7913
-    m_Address: Asteroid12Texture1 Variant
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c3438836b35582b4688d03aa00896b5d
-    m_Address: Asteroid1Texture2 Variant
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 26837da39efdb4949afd0582ee150276
-    m_Address: Asteroid2Texture2 Variant
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5fd0e783035e6384baf83e00a8967dc8
-    m_Address: Asteroid3Texture2 Variant
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 203d680f800f74c4b907e58d1e20444e
-    m_Address: Asteroid4Texture2 Variant
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1ea1866d5493a9748971628aad13ab18
-    m_Address: Asteroid5Texture2 Variant
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 85750fb23160bc14bba2384e29509b9a
-    m_Address: Asteroid6Texture2 Variant
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1b018392b7e75104897dacef41d451d2
-    m_Address: Asteroid7Texture2 Variant
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 0d0cbf7236d647944a77dbb8d586708a
-    m_Address: Asteroid8Texture2 Variant
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b06a33f8e592b2a4c80f60dce6e37ff6
-    m_Address: Asteroid9Texture2 Variant
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: de1c0905ec077744797bedd86a7d603d
-    m_Address: Asteroid10Texture2 Variant
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c2357713fdc46b14da0dfdbca3e4f275
-    m_Address: Asteroid11Texture2 Variant
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6e3f6b50771477b47b84f58f0d1f0abb
-    m_Address: Asteroid12Texture2 Variant
+  - m_GUID: be97f1bf36281ec4a8b21cec99af0380
+    m_Address: Asteroid1
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
