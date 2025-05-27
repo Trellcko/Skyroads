@@ -1,6 +1,10 @@
-﻿using Trell.Skyroads.Infrastructure.AssetManagment;
+﻿using System.Threading.Tasks;
+using Trell.Skyroads.Gameplay.Score;
+using Trell.Skyroads.Infrastructure.AssetManagment;
 using Trell.Skyroads.Infrastructure.Factories;
 using Trell.Skyroads.Infrastructure.Input;
+using Trell.Skyroads.Infrastructure.Saving;
+using UnityEngine;
 
 namespace Trell.Skyroads.Infrastructure.States
 {
@@ -23,7 +27,7 @@ namespace Trell.Skyroads.Infrastructure.States
 
         public override void Enter()
         {
-            _sceneService.Load(Constants.SceneNames.BootstrapScene, GoToState<LoadGameState>);
+            _sceneService.Load(Constants.SceneNames.BootstrapScene, GoToState<LoadProgressState>);
         }
 
         private void RegisterServices()
@@ -31,11 +35,20 @@ namespace Trell.Skyroads.Infrastructure.States
             _sceneService = new SceneService(_coroutineRunner);
             _serviceLocator.Register(_coroutineRunner);
             _serviceLocator.Register(_sceneService);
-            _serviceLocator.Register(_staticDataService);
-            AssetProvider assetProvider = new AssetProvider();
+            
+            AssetProvider assetProvider = new();
             _serviceLocator.Register<IAssetProvider>(assetProvider);
-            _serviceLocator.Register<IGameFactory>(new GameFactory(assetProvider, _staticDataService));
+            
+            _serviceLocator.Register(_staticDataService);
             _serviceLocator.Register<IInputService>(new StandaloneInput());
+            _serviceLocator.Register<IGameFactory>(new GameFactory(assetProvider, _staticDataService));
+
+            PersistantPlayerProgressService persistantPlayerProgressService = new();
+            _serviceLocator.Register<IPersistantPlayerProgressService>(persistantPlayerProgressService);
+
+            Score score = new();
+            _serviceLocator.Register<IScore>(score);
+            _serviceLocator.Register<ISaveService>(new SaveService(persistantPlayerProgressService, score));
         }
     }
 }

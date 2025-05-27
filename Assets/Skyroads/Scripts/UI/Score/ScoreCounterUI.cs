@@ -1,27 +1,47 @@
 using TMPro;
 using Trell.Skyroads.Gameplay.Score;
+using Trell.Skyroads.Infrastructure;
 using UnityEngine;
 
 namespace Trell.Skyroads.UI
 {
     public class ScoreCounterUI : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI _text;
-        [SerializeField] private ScoreCounter _scoreCounter;
+        [SerializeField] private TextMeshProUGUI _currentScoreText;
+        [SerializeField] private TextMeshProUGUI _highScoreText;
+
+        private IScore _score;
+
+        private void Awake()
+        {
+            _score = ServiceLocator.Instance.Get<IScore>();
+        }
+
+        private void Start()
+        {
+            OnHighValueChanged();
+        }
 
         private void OnEnable()
         {
-            _scoreCounter.ScoreUpdated += OnScoreUpdated;
+            _score.CurrencyChanged += OnScoreCurrencyChanged;
+            _score.HighValueChanged += OnHighValueChanged;
         }
 
         private void OnDisable()
         {
-            _scoreCounter.ScoreUpdated -= OnScoreUpdated;
+            _score.CurrencyChanged -= OnScoreCurrencyChanged;
+            _score.HighValueChanged -= OnHighValueChanged;
         }
 
-        private void OnScoreUpdated()
+        private void OnScoreCurrencyChanged()
         {
-            _text.SetText($"Score: {_scoreCounter.CurrentValue:0}");
+            _currentScoreText.SetText($"Score: {_score.CurrentValue}");
+        }
+
+        private void OnHighValueChanged()
+        {
+            _highScoreText.SetText($"High Score: {_score.HighValue}");
         }
     }
 }

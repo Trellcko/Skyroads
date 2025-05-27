@@ -219,7 +219,12 @@ PrefabInstance:
     - target: {fileID: 4940608295437868745, guid: 2d3b4fd59e68c4980adf82ff9eb05093,
         type: 3}
       propertyPath: m_Name
-      value: Star_Fighter_prefab Variant
+      value: Ship
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940608295437868745, guid: 2d3b4fd59e68c4980adf82ff9eb05093,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7255688635831418968, guid: 2d3b4fd59e68c4980adf82ff9eb05093, type: 3}
@@ -246,6 +251,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3223292770386403937}
+    - targetCorrespondingSourceObject: {fileID: 4940608295437868745, guid: 2d3b4fd59e68c4980adf82ff9eb05093,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9089917581444909120}
+    - targetCorrespondingSourceObject: {fileID: 4940608295437868745, guid: 2d3b4fd59e68c4980adf82ff9eb05093,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7199603281977556685}
   m_SourcePrefab: {fileID: 100100000, guid: 2d3b4fd59e68c4980adf82ff9eb05093, type: 3}
 --- !u!1 &1854196586473140018 stripped
 GameObject:
@@ -285,8 +298,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 11.265877, y: 11.602852, z: 26.337662}
-  m_Center: {x: 0.39392376, y: 5.301426, z: 2.5430603}
+  m_Size: {x: 18.320652, y: 17.78376, z: 26.337662}
+  m_Center: {x: -0.35645103, y: 8.39188, z: 2.5430603}
 --- !u!54 &3223292770386403937
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -314,6 +327,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &9089917581444909120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854196586473140018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69cc7e7d90c445ed86caff27736d2671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <ShipCollisionEventsInvoker>k__BackingField: {fileID: 7199603281977556685}
+  <ShipMovement>k__BackingField: {fileID: -8849790624670371386}
+--- !u!114 &7199603281977556685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854196586473140018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7838036b36616342bbdf6f485c0b760, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1854196586473140019 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4940608295437868744, guid: 2d3b4fd59e68c4980adf82ff9eb05093,

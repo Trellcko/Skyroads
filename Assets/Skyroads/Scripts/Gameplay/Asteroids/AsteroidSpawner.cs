@@ -1,4 +1,5 @@
 using Trell.Skyroads.Extra;
+using Trell.Skyroads.Gameplay.Ship;
 using Trell.Skyroads.Infrastructure;
 using Trell.Skyroads.Infrastructure.Factories;
 using Trell.Skyroads.Infrastructure.Input;
@@ -12,22 +13,26 @@ namespace Trell.Skyroads.Gameplay.Asteroid
         [SerializeField] private bool _drawSafeZone;
         [SerializeField] private bool _drawSpawnLine;
 
+        [SerializeField] private AsteroidSpawnerData _asteroidSpawnerData;
+        
         [SerializeField] private Vector2 _asteroidSafeZoneX;
-        [SerializeField] private int _spawnAsteroidsCount;
         [SerializeField] private float _safeZoneWeight;
         [SerializeField] private float _offsetBetweenSafeZones;
-        [SerializeField] private float _timeBetweenAsteroidSpawns;
         [SerializeField] private float _spawnZ;
         [SerializeField] private float _spawnY;
         [SerializeField] private float _spawnXOffset;
 
         private BetterTimer _spawnTimer;
+        private BetterTimer _changeSpawnTimeTimer;
 
+        private float _spawnTime;
+        
         private const int MaxAttemptToSpawnAsteroid = 100;
 
         private IStaticDataService _staticDataService;
         private IInputService _inputService;
         private IGameFactory _gameFactory;
+        private ShipFacade _ship;
 
         #region Gizmoz
         private void OnDrawGizmos()
@@ -48,11 +53,21 @@ namespace Trell.Skyroads.Gameplay.Asteroid
             _inputService = ServiceLocator.Instance.Get<IInputService>();
             _staticDataService = ServiceLocator.Instance.Get<IStaticDataService>();
             _gameFactory = ServiceLocator.Instance.Get<IGameFactory>();
-            _spawnTimer = new(_timeBetweenAsteroidSpawns, loop: true, playAwake: true);
+            _spawnTime = _asteroidSpawnerData.TimeBetweenAsteroidSpawnsMinMax.y;
+            _spawnTimer = new(_spawnTime, loop: true, playAwake: true);
+            _changeSpawnTimeTimer = new(_asteroidSpawnerData.TimeToChangeSpawnTimeBetweenAsteroids, loop: true,
+                playAwake: false);
+        }
+
+        private void Start()
+        {
+            _ship = _gameFactory.SpawnedShip;
+            _ship.ShipCollisionEventsInvoker.AsteroidCollided += OnAsteroidCollided;
         }
 
         private void OnEnable()
         {
+            _changeSpawnTimeTimer.Completed += OnChangeSpawnTimeTimerCompleted;
             _spawnTimer.Completed += SpawnAsteroids;
             _inputService.BoostPerformed += OnBoostPerformed;
             _inputService.BoostReleased += OnBoostReleased;
@@ -60,6 +75,7 @@ namespace Trell.Skyroads.Gameplay.Asteroid
 
         private void OnDisable()
         {
+            _ship.ShipCollisionEventsInvoker.AsteroidCollided -= OnAsteroidCollided;
             _spawnTimer.Completed -= SpawnAsteroids;
             _inputService.BoostPerformed -= OnBoostPerformed;
             _inputService.BoostReleased -= OnBoostReleased;
@@ -68,6 +84,7 @@ namespace Trell.Skyroads.Gameplay.Asteroid
 
         private void Update()
         {
+            _changeSpawnTimeTimer?.Tick();
             _spawnTimer.Tick();
         }
 
@@ -75,12 +92,9 @@ namespace Trell.Skyroads.Gameplay.Asteroid
         {
             RecalculateSafeZonePosition();
 
-            for (int i = 0; i < _spawnAsteroidsCount; i++)
+            if (GetAsteroidSpawnPosition(out Vector3 asteroidPosition))
             {
-                if (GetAsteroidSpawnPosition(out Vector3 asteroidPosition))
-                {
-                    _gameFactory.CreateAsteroid(asteroidPosition);
-                }
+                _gameFactory.CreateAsteroid(asteroidPosition);
             }
         }
 
@@ -114,6 +128,15 @@ namespace Trell.Skyroads.Gameplay.Asteroid
                 newSafeZoneXPosition + _safeZoneWeight);
         }
 
+        private void OnChangeSpawnTimeTimerCompleted()
+        {
+            _spawnTime = Mathf.Clamp(_spawnTime - _asteroidSpawnerData.SpawnIntervalStep,
+                _asteroidSpawnerData.TimeBetweenAsteroidSpawnsMinMax.x,
+                _asteroidSpawnerData.TimeBetweenAsteroidSpawnsMinMax.y);
+            
+            _spawnTimer.SetTime(_spawnTime);
+        }
+
         private void OnBoostReleased()
         {
             _spawnTimer.SetSpeed(1);
@@ -122,6 +145,11 @@ namespace Trell.Skyroads.Gameplay.Asteroid
         private void OnBoostPerformed()
         {
             _spawnTimer.SetSpeed(_staticDataService.GetTimeData().BoostTimeSpeed);
+        }
+
+        private void OnAsteroidCollided()
+        {
+            enabled = false;
         }
     }
 }
